@@ -1,7 +1,18 @@
-import discord
-from discord.ext import commands
-import json
+import threading
 import os
+from flask import Flask
+
+app = Flask(name)
+
+@app.route("/")
+def home():
+    return "bot is running"
+
+def run_web():
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
+
+threading.Thread(target=run_web).start()
 
 # ===== 設定 =====
 TOKEN = os.getenv("TOKEN")
@@ -242,4 +253,5 @@ async def on_message(message):
 
 # ===== Run =====
 bot.run(TOKEN)
+
 
