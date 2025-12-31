@@ -106,14 +106,13 @@ async def f98(ctx, user: discord.Member = None):
 async def f99(ctx, user: discord.Member = None):
     await add_f96(ctx, user)
 
-@bot.command()
+@bot.command(name="100f")
 async def f100(ctx, user: discord.Member = None):
     target = get_target(ctx, user)
     init_user(ctx.guild, target)
     counts[str(ctx.guild.id)][str(target.id)]["100f"] += 1
     save()
     await ctx.send(f"💸 100ファンブル +1（{target.display_name}）")
-
 
 @bot.command()
 async def sub(ctx, kind: str, amount: int, user: discord.Member = None):
@@ -214,6 +213,32 @@ async def count_cmd(ctx, user: discord.Member = None):
         )
 
     await ctx.send(embed=embed)
+
+import random
+
+@bot.event
+async def on_message(message):
+    # Bot自身のメッセージには反応しない
+    if message.author.bot:
+        return
+
+    # ランダム返信リスト
+    replies = [
+        "ボクを呼んだかい？",
+        "やぁやぁ！ボクだよ！",
+        "よく言われるよ。",
+        "はは！ボクの事だろう？",
+        "それは周知の事実じゃないか。",
+        "ボクの事だね！"
+    ]
+
+    # 「天才」が含まれていたらランダム返信
+    if "天才" in message.content:
+        await message.channel.send(random.choice(replies))
+
+    # コマンドを動かすために必要
+    await bot.process_commands(message)
+
 
 # ===== Run =====
 bot.run(TOKEN)
