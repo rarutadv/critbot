@@ -1,5 +1,8 @@
 import threading
 import os
+import json
+import discord
+from discord.ext import commands
 from flask import Flask
 
 app = Flask(__name__)
@@ -253,6 +256,7 @@ async def on_message(message):
 
 # ===== Run =====
 bot.run(TOKEN)
+
 
 
 
