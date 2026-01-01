@@ -2,7 +2,7 @@ import threading
 import os
 from flask import Flask
 
-app = Flask(name)
+app = Flask(__name__)
 
 @app.route("/")
 def home():
@@ -253,5 +253,6 @@ async def on_message(message):
 
 # ===== Run =====
 bot.run(TOKEN)
+
 
 
